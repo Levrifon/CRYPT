@@ -1,0 +1,13 @@
+Entete banque :
+#################################
+#	GILLES' BANK CORPORATED #
+#	SOCIETE ANONYME		#
+#	VILLENEUVE D'ASCQ LILLE1#
+#	CLIENT 2XS		#
+#################################
+
+Signature de la banque : 
+MZ4SaW6aqVnRP7xqNLNKeUsDOdyPY/fdXNt0GTG4LxuVHypW1l7ssQaGWuNJlY8p8zDZdlSsNTEP
+hvM7Qh89KdnMfLifk+FAr1KoYBqLIGjHs//YvINpVtBqxtso6yLA2lSCqmHUPSYXQVb+emV+9jMO
+Uz0u3OxMba8VmKZZRPY=
+Montant: 55€

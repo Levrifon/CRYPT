@@ -1,0 +1,45 @@
+Creation d'un chèque sécurisé pour le client et le marchand
+
+
+@Source , @Destination , Montant
+
+
+chèque = (id_cheque , bank_pub_key, id_client, prix)
+
+CLIENT			MARCHAND		BANQUE
+chèque de la banque
+
+
+
+Initialisation :
+	- La banque distribue sa clé publique au marchand et au client
+	- La banque distribue clé publique/privée au client
+	- La banque signe les infos du client (id_client,client_pub_key) avec sa clé secrète (bank_sec_key)
+	- La banque envoie le infos chiffrés au client
+Creation Facture :
+	- Le marchand créér sur une facture :
+		(id_marchand, montant, nombre_aleat_1)
+	- Le marchand envoie sa facture au client
+Paiement :
+	- Le client reçoit la facture
+	- Le client crée un chèque :
+		sign_client((montant,id_marchand + sign_bank(id_client,client_pub_key)) + nombre_aleat_2)
+	- Le client donne sa clé publique au marchand
+	- Le client donne son chèque au marchand (avec la signature de la banque)
+Verification :
+	- Le marchand vérifie la signature de la banque (id_client_client_pub_key)
+	- Le marchand vérifie le chèque avec la signature de client_pub_key
+	- Le marchand vérifie le montant, destinataire (il vérifie la signature de l'id_client avec la bank_pub_key)
+Encaissement :
+	- La banque encaisse le chèque
+
+
+1/ La banque envoie sa clé publique à tout le monde
+2/ Le client chiffre son identifiant + prix avec la bank_pub_key
+3/ Le client envoie son chèque au marchand
+4/ Le marchand déchiffre l'id_banque avec la clé publique de la banque pour vérifier l'authenticité du chèque
+5/ Le marchand chiffre le prix avec la bank_pub_key (donc apparition de deux prix , celui chiffré par le client , celui chiffré par le marchand)
+6/ Le marchand rajoute au chèque l'id_marchand en le chiffrant avec sa clé privée
+7/ La banque récupère le chèque, vérifie que le marchand existe bien (en déchiffrant id_marchand avec la marchand_pub_key)
+8/ La banque déchiffre les deux montants marchand et clients et compare si ils sont bien égaux (pour éviter la fraude).
+

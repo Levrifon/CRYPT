@@ -1,0 +1,36 @@
+Fondements des systèmes cryptographique :
+
+
+Cryptographie = kruptos (caché) graphein (écrire)
+Cryptosystème = matériel ou logiciel réalisant l'opération cryptographique.
+
+Clé (nombre) qui configure le cryptosystème.
+
+AES
+Shiftrow (déclage des lignes de l'état actuel)
+Mixrow on multiplie l'état par une matrice (multiplication de polynome dans F256)
+AddRoundKey (addition de la clé avec un XOR)
+
+Système asymétrique :
+2 clés
+chiffrement : C = M^e mod N
+déchiffrement : M = C^d mod N
+
+commandes :
+openssl genrsa 1024
+cat private.key | openssl rsa -text -noout (description de la clé)
+cat private.key | openssl rsa -pubout (création de clé privée)
+echo "message" | openssl rsautl -encrypt -inkey <private.key>
+		 (rsa utilities)
+
+Chiffrer avec sa clé privée ==> prouver son identité.
+
+On peut déchiffrer avec la clé privée un message chiffré avec la clé publique
+"cat d.txt | base64 -d | openssl rsautl -decrypt -inkey private.key"
+
+/!\ MAIS PAS L'INVERSE /!\
+
+avec AES (pour les fichiers plus gros) : 
+enc : echo "hello" | openssl enc -e -aes-128-cbc -pass pass:test > msg.bin
+dec : cat msg.bin | openssl enc -d -aes-128-cbc -pass pass:test
+
