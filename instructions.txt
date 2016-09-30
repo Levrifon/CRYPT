@@ -15,7 +15,7 @@ Initialisation :
 	- La banque distribue sa clé publique au marchand et au client
 	- La banque distribue clé publique/privée au client
 	- La banque signe les infos du client (id_client,client_pub_key) avec sa clé secrète (bank_sec_key)
-	- La banque envoie le infos chiffrés au client
+	- La banque envoie le infos avec signature au client
 Creation Facture :
 	- Le marchand créér sur une facture :
 		(id_marchand, montant, nombre_aleat_1)
@@ -33,13 +33,4 @@ Verification :
 Encaissement :
 	- La banque encaisse le chèque
 
-
-1/ La banque envoie sa clé publique à tout le monde
-2/ Le client chiffre son identifiant + prix avec la bank_pub_key
-3/ Le client envoie son chèque au marchand
-4/ Le marchand déchiffre l'id_banque avec la clé publique de la banque pour vérifier l'authenticité du chèque
-5/ Le marchand chiffre le prix avec la bank_pub_key (donc apparition de deux prix , celui chiffré par le client , celui chiffré par le marchand)
-6/ Le marchand rajoute au chèque l'id_marchand en le chiffrant avec sa clé privée
-7/ La banque récupère le chèque, vérifie que le marchand existe bien (en déchiffrant id_marchand avec la marchand_pub_key)
-8/ La banque déchiffre les deux montants marchand et clients et compare si ils sont bien égaux (pour éviter la fraude).
 
