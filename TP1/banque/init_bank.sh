@@ -23,6 +23,9 @@ cp client_skey.key ../client/
 #La banque distribue sa clé publique au marchand et au client
 cp bank_pkey.key ../client/
 cp bank_pkey.key ../marchand/
+#La banque envoie un chèque vierge au client
+touch cheque.txt
+mv cheque.txt ../client/
 
 #openssl dgst -sha256 cheque_description.txt > bank_hash
 #openssl rsautl -sign -inkey bank_skey.key -keyform PEM -in bank_hash > bank_signature

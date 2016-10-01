@@ -27,7 +27,7 @@ Paiement :
 	- Le client donne sa clé publique au marchand
 	- Le client donne son chèque au marchand (avec la signature de la banque)
 Verification :
-	- Le marchand vérifie la signature de la banque (id_client_client_pub_key)
+	- Le marchand vérifie la signature de la banque (id_client,client_pub_key)
 	- Le marchand vérifie le chèque avec la signature de client_pub_key
 	- Le marchand vérifie le montant, destinataire (il vérifie la signature de l'id_client avec la bank_pub_key)
 Encaissement :
