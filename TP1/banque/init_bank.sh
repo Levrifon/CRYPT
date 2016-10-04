@@ -12,12 +12,14 @@ echo "id_client:" >> client_info.txt
 echo "id_client1" >> client_info.txt
 echo "client_pkey:" >> client_info.txt
 cat client_pkey.key | tr -d '\n' >> client_info.txt
+echo '' >> client_info.txt
 #Signature des infos du client par la banque
-signature_banque=`openssl dgst -sha256 -sign bank_skey.key client_info.txt | base64 | tr -d '\n'`
-echo -e '\n' >> client_info.txt
+signature_banque=`openssl dgst -sha256 -sign bank_skey.key client_info.txt | tr -d '\n'`
+cp client_info.txt client_info_sauvegarde.txt
 echo "signature banque:" >> client_info.txt
 echo $signature_banque >> client_info.txt
-echo -e '\n' >> client_info.txt
+echo $signature_banque >> sauvegarde_sign_bank.txt
+#echo -e '\n' >> client_info.txt
 #La banque envoie les infos au client
 cp client_info.txt ../client/
 #La banque envoie le couple client_skey/client_pkey 
@@ -28,7 +30,7 @@ cp bank_pkey.key ../client/
 cp bank_pkey.key ../marchand/
 #La banque envoie un chèque vierge au client
 touch cheque.txt
-mv cheque.txt ../client/
+cp cheque.txt ../client/
 
 #openssl dgst -sha256 cheque_description.txt > bank_hash
 #openssl rsautl -sign -inkey bank_skey.key -keyform PEM -in bank_hash > bank_signature

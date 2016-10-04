@@ -9,9 +9,9 @@ echo $RANDOM >> cheque.txt
 echo "Envoi de la clé publique du client au marchand:"
 cp client_pkey.key ../marchand/
 echo "Envoi terminé"
-signature_client=`openssl dgst -sha256 -sign client_skey.key cheque.txt | base64 | tr -d '\n'`
+signature_client=`openssl dgst -sha256 -sign client_skey.key cheque.txt |tr -d '\n'`
 echo "signature du client:" >> cheque.txt
 echo $signature_client >> cheque.txt
-echo -e '\n' >> cheque.txt
-mv cheque.txt ../marchand/
+echo '' >> cheque.txt
+cp cheque.txt ../marchand/
 
