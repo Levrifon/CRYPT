@@ -14,7 +14,7 @@ echo "client_pkey:" >> client_info.txt
 cat client_pkey.key | tr -d '\n' >> client_info.txt
 echo '' >> client_info.txt
 #Signature des infos du client par la banque
-signature_banque=`openssl dgst -sha256 -sign bank_skey.key client_info.txt | tr -d '\n'`
+signature_banque=`openssl dgst -sha256 -sign bank_skey.key client_info.txt | base64 | tr -d '\n'`
 cp client_info.txt client_info_sauvegarde.txt
 echo "signature banque:" >> client_info.txt
 echo $signature_banque >> client_info.txt

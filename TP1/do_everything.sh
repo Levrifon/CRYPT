@@ -5,4 +5,5 @@ cd ../marchand/
 ./facture.sh
 cd ../client/
 ./init_client.sh
-cd ..
+cd ../marchand/
+./verification.sh
