@@ -1,0 +1,5 @@
+*.bin
+tmp
+tmp2
+*.o
+*.key
