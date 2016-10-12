@@ -7,6 +7,6 @@ echo "55€" >> facture.txt
 echo "id_facture:" >> facture.txt
 echo $RANDOM >> facture.txt
 #Envoi de la facture au client
-mv facture.txt ../client/
+cp facture.txt ../client/
 echo "Facture envoyée"
 

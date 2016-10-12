@@ -7,3 +7,5 @@ cd ../client/
 ./init_client.sh
 cd ../marchand/
 ./verification.sh
+cd ../banque/
+./encaissement.sh

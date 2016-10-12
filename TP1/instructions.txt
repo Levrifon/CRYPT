@@ -1,36 +1,41 @@
 Creation d'un chèque sécurisé pour le client et le marchand
 
-
-@Source , @Destination , Montant
-
-
-chèque = (id_cheque , bank_pub_key, id_client, prix)
-
-CLIENT			MARCHAND		BANQUE
-chèque de la banque
-
-
+Arborescence :
+./clean_everything.sh (réinitialise tout, à refaire à chaque execution)
+./do_everything.sh (permet de faire le transfert des clés / vérifications / encaissement)
+	=> il appelle les scripts:
+		banque/init_bank.sh
+		marchand/facture.sh
+		client/init_client.sh
+		marchand/verification.sh
+		banque/encaissement.sh
+		
+		
+					
 
 Initialisation :
 	- La banque distribue sa clé publique au marchand et au client
 	- La banque distribue clé publique/privée au client
-	- La banque signe les infos du client (id_client,client_pub_key) avec sa clé secrète (bank_sec_key)
+	- La banque signe les infos du client (id_client,client_pub_key) avec sa clé secrète (bank_sec_key) pour éviter toute modification de clé publique du client (usurpation).
 	- La banque envoie le infos avec signature au client
 Creation Facture :
 	- Le marchand créér sur une facture :
 		(id_marchand, montant, nombre_aleat_1)
+	L'aléatoire permet au marchand de s'assurer que le client ne revienne pas avec le même chèque plus tard car l'aléatoire sera différent. (nombre_aleat_1 correspond finalement à un id_facture)
 	- Le marchand envoie sa facture au client
 Paiement :
 	- Le client reçoit la facture
 	- Le client crée un chèque :
-		sign_client((montant,id_marchand + sign_bank(id_client,client_pub_key)) + nombre_aleat_2)
+		sign_client((montant,id_marchand + sign_bank(id_client,client_pub_key)) + nombre_aleat_2), le nombre aleatoire 2 correspond à l'id_cheque
 	- Le client donne sa clé publique au marchand
 	- Le client donne son chèque au marchand (avec la signature de la banque)
 Verification :
-	- Le marchand vérifie la signature de la banque (id_client,client_pub_key)
+	- Le marchand vérifie la signature de la banque (id_client,client_pub_key), pour s'assurer que le client qui donne sa clé publique est bien la même que celle signée par la banque
 	- Le marchand vérifie le chèque avec la signature de client_pub_key
 	- Le marchand vérifie le montant, destinataire (il vérifie la signature de l'id_client avec la bank_pub_key)
 Encaissement :
-	- La banque encaisse le chèque
+	- La banque vérifie les deux signatures (d'elle même et du client) pour être sûr que personne n'a modifié les informations
+	- La banque vérifie que la transaction n'existe pas déjà
+	- La banque encaisse le chèque et note la transaction id_client;id_marchand;id_facture;montant
 
 
